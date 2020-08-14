@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './results.css';
+import '../../public/styles/style.css';
 import Timestamp from 'react-timestamp';
 import ReactTimeAgo from 'react-time-ago';
 

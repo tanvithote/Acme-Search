@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './search.css';
-import calendar from './data/calendar.json';
-import contacts from './data/contacts.json';
-import dropbox from './data/dropbox.json';
-import slack from './data/slack.json';
-import tweet from './data/tweet.json';
+import '../../public/styles/style.css';
+import calendar from '../data/calendar.json';
+import contacts from '../data/contacts.json';
+import dropbox from '../data/dropbox.json';
+import slack from '../data/slack.json';
+import tweet from '../data/tweet.json';
 import Results from './results';
 
 class Search extends Component {
