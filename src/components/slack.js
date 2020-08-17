@@ -3,7 +3,7 @@ import Timestamp from "react-timestamp";
 import Interaction from "./interaction";
 import BestMatch from "./bestMatch";
 
-function Slack({ slack, pinned, updateSlack }) {
+function Slack({ from, slack, pinned, updateSlack }) {
   const result_slack = slack.sort(
     (a, b) => parseFloat(b.match_value) - parseFloat(a.match_value)
   );
@@ -26,13 +26,25 @@ function Slack({ slack, pinned, updateSlack }) {
               Time:{" "}
               {<Timestamp date={s.timestamp} options={{ includeDay: true }} />}
               <br />
-              <Interaction
-                pinned={pinned}
-                data={slack}
-                updateState={updateSlack}
-                cardType="result_slack"
-                card={s}
-              />
+              {from === "pinned" ? (
+                <Interaction
+                  pinned={slack}
+                  data={pinned}
+                  updateState={updateSlack}
+                  cardType="result_slack"
+                  card={s}
+                  from={from}
+                />
+              ) : (
+                <Interaction
+                  pinned={pinned}
+                  data={slack}
+                  updateState={updateSlack}
+                  cardType="result_slack"
+                  card={s}
+                  from={from}
+                />
+              )}
             </div>
           </div>
         );

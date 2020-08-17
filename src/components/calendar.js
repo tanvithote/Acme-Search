@@ -3,10 +3,11 @@ import Interaction from "./interaction";
 import Timestamp from "react-timestamp";
 import BestMatch from "./bestMatch";
 
-function Calendar({ calendar, pinned, updateCalendar }) {
+function Calendar({ from, calendar, pinned, updateCalendar }) {
   const result_calendar = calendar.sort(
     (a, b) => parseFloat(b.match_value) - parseFloat(a.match_value)
   );
+
   return (
     <div className="row">
       {result_calendar.map((c, i) => {
@@ -24,13 +25,25 @@ function Calendar({ calendar, pinned, updateCalendar }) {
               Date: {<Timestamp date={c.date} options={{ includeDay: true }} />}
               <br />
               {/* {console.log(updateCalendar)} */}
-              <Interaction
-                pinned={pinned}
-                data={calendar}
-                updateState={updateCalendar}
-                cardType="result_calendar"
-                card={c}
-              />
+              {from === "pinned" ? (
+                <Interaction
+                  pinned={calendar}
+                  data={pinned}
+                  updateState={updateCalendar}
+                  cardType="result_calendar"
+                  card={c}
+                  from={from}
+                />
+              ) : (
+                <Interaction
+                  pinned={pinned}
+                  data={calendar}
+                  updateState={updateCalendar}
+                  cardType="result_calendar"
+                  card={c}
+                  from={from}
+                />
+              )}
             </div>
           </div>
         );

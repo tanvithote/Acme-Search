@@ -2,7 +2,7 @@ import React from "react";
 import Interaction from "./interaction";
 import BestMatch from "./bestMatch";
 
-function Twitter({ tweet, pinned, updateTweet }) {
+function Twitter({ from, tweet, pinned, updateTweet }) {
   const result_tweet = tweet.sort(
     (a, b) => parseFloat(b.match_value) - parseFloat(a.match_value)
   );
@@ -22,13 +22,25 @@ function Twitter({ tweet, pinned, updateTweet }) {
             <div className="card-footer text-muted">
               Time: {s.timestamp}
               <br />
-              <Interaction
-                pinned={pinned}
-                data={tweet}
-                updateState={updateTweet}
-                cardType="result_tweet"
-                card={s}
-              />
+              {from === "pinned" ? (
+                <Interaction
+                  pinned={tweet}
+                  data={pinned}
+                  updateState={updateTweet}
+                  cardType="result_tweet"
+                  card={s}
+                  from={from}
+                />
+              ) : (
+                <Interaction
+                  pinned={pinned}
+                  data={tweet}
+                  updateState={updateTweet}
+                  cardType="result_tweet"
+                  card={s}
+                  from={from}
+                />
+              )}
             </div>
           </div>
         );

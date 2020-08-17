@@ -3,7 +3,7 @@ import ReactTimeAgo from "react-time-ago";
 import Interaction from "./interaction";
 import BestMatch from "./bestMatch";
 
-function Contacts({ contacts, pinned, updateContacts }) {
+function Contacts({ from, contacts, pinned, updateContacts }) {
   const result_contacts = contacts.sort(
     (a, b) => parseFloat(b.match_value) - parseFloat(a.match_value)
   );
@@ -40,13 +40,25 @@ function Contacts({ contacts, pinned, updateContacts }) {
             <div className="card-footer text-muted">
               Last Contacted: {<ReactTimeAgo date={c.last_contact} />}
               <br />
-              <Interaction
-                pinned={pinned}
-                data={contacts}
-                updateState={updateContacts}
-                cardType="result_contacts"
-                card={c}
-              />
+              {from === "pinned" ? (
+                <Interaction
+                  pinned={contacts}
+                  data={pinned}
+                  updateState={updateContacts}
+                  cardType="result_contacts"
+                  card={c}
+                  from={from}
+                />
+              ) : (
+                <Interaction
+                  pinned={pinned}
+                  data={contacts}
+                  updateState={updateContacts}
+                  cardType="result_contacts"
+                  card={c}
+                  from={from}
+                />
+              )}
             </div>
           </div>
         );

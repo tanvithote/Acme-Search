@@ -3,7 +3,8 @@ import ReactTimeAgo from "react-time-ago";
 import Interaction from "./interaction";
 import BestMatch from "./bestMatch";
 
-function Dropbox({ dropbox, pinned, updateDropbox }) {
+function Dropbox({ from, dropbox, pinned, updateDropbox }) {
+  console.log("in dropbox", dropbox);
   const result_dropbox = dropbox.sort(
     (a, b) => parseFloat(b.match_value) - parseFloat(a.match_value)
   );
@@ -25,13 +26,25 @@ function Dropbox({ dropbox, pinned, updateDropbox }) {
             <div className="card-footer text-muted">
               Created: {<ReactTimeAgo date={d.created} />}
               <br />
-              <Interaction
-                pinned={pinned}
-                data={dropbox}
-                updateState={updateDropbox}
-                cardType="result_dropbox"
-                card={d}
-              />
+              {from === "pinned" ? (
+                <Interaction
+                  pinned={dropbox}
+                  data={pinned}
+                  updateState={updateDropbox}
+                  cardType="result_dropbox"
+                  card={d}
+                  from={from}
+                />
+              ) : (
+                <Interaction
+                  pinned={pinned}
+                  data={dropbox}
+                  updateState={updateDropbox}
+                  cardType="result_dropbox"
+                  card={d}
+                  from={from}
+                />
+              )}
             </div>
           </div>
         );

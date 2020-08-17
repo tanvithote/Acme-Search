@@ -38,6 +38,7 @@ class Search extends Component {
 
   filterFunction(c) {
     let val = 0;
+    //if (!this.state.pinned.includes(c)) {
     c.matching_terms.forEach(item => {
       if (this.state.query.toLowerCase().indexOf(item.toLowerCase()) !== -1) {
         val += 1;
@@ -48,6 +49,7 @@ class Search extends Component {
       // console.log(c);
       return c;
     }
+    //}
   }
 
   updateState(state, data) {
@@ -116,7 +118,7 @@ class Search extends Component {
 
                 <Pinned
                   pinned={this.state.pinned}
-                  updateCalendar={this.updateState}
+                  updateState={this.updateState}
                 />
               </div>
               <hr />
@@ -126,6 +128,7 @@ class Search extends Component {
               >
                 <h6>Calendar Results:</h6>
                 <Calendar
+                  from="calendar"
                   calendar={this.state.result_calendar}
                   pinned={this.state.pinned}
                   updateCalendar={this.updateState}
@@ -137,6 +140,7 @@ class Search extends Component {
               >
                 <h6>Contact Results:</h6>
                 <Contacts
+                  from="contacts"
                   contacts={this.state.result_contacts}
                   pinned={this.state.pinned}
                   updateContacts={this.updateState}
@@ -148,6 +152,7 @@ class Search extends Component {
               >
                 <h6>Dropbox Results:</h6>
                 <Dropbox
+                  from="dropbox"
                   dropbox={this.state.result_dropbox}
                   pinned={this.state.pinned}
                   updateDropbox={this.updateState}
@@ -159,6 +164,7 @@ class Search extends Component {
               >
                 <h6>Slack Results:</h6>
                 <Slack
+                  from="slack"
                   slack={this.state.result_slack}
                   pinned={this.state.pinned}
                   updateSlack={this.updateState}
@@ -170,6 +176,7 @@ class Search extends Component {
               >
                 <h6>Tweet Results:</h6>
                 <Twitter
+                  from="tweet"
                   tweet={this.state.result_tweet}
                   pinned={this.state.pinned}
                   updateTweet={this.updateState}
