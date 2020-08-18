@@ -24,7 +24,11 @@ class Search extends Component {
       result_dropbox: [],
       result_slack: [],
       result_tweet: [],
-      pinned: []
+      pinned: [],
+      offset: 0,
+      perPage: 4,
+      currentPage: 0,
+      tags: ""
     };
     this.handleClick = this.handleClick.bind(this);
     this.updateState = this.updateState.bind(this);
@@ -33,12 +37,10 @@ class Search extends Component {
   handleOnInputChange = event => {
     const query = event.target.value;
     this.setState({ query, loading: true, message: "", clicked: false });
-    //   console.log(query)
   };
 
   filterFunction(c) {
     let val = 0;
-    //if (!this.state.pinned.includes(c)) {
     c.matching_terms.forEach(item => {
       if (this.state.query.toLowerCase().indexOf(item.toLowerCase()) !== -1) {
         val += 1;
@@ -46,10 +48,8 @@ class Search extends Component {
     });
     if (val > 0) {
       c["match_value"] = val;
-      // console.log(c);
       return c;
     }
-    //}
   }
 
   updateState(state, data) {
@@ -80,7 +80,6 @@ class Search extends Component {
       result_slack,
       result_tweet
     } = this.state;
-    // console.log(clicked);
     return (
       <div>
         <div className="container">
@@ -88,6 +87,8 @@ class Search extends Component {
           <SearchTab
             handleClick={this.handleClick}
             handleOnInputChange={this.handleOnInputChange}
+            query={this.state.query}
+            updateState={this.updateState}
           />
         </div>
         <div className="results">
@@ -119,6 +120,9 @@ class Search extends Component {
                 <Pinned
                   pinned={this.state.pinned}
                   updateState={this.updateState}
+                  offset={this.state.offset}
+                  perPage={this.state.perPage}
+                  currentPage={this.state.currentPage}
                 />
               </div>
               <hr />
@@ -132,6 +136,7 @@ class Search extends Component {
                   calendar={this.state.result_calendar}
                   pinned={this.state.pinned}
                   updateCalendar={this.updateState}
+                  tags={this.state.tags}
                 />
               </div>
               <div
@@ -144,6 +149,7 @@ class Search extends Component {
                   contacts={this.state.result_contacts}
                   pinned={this.state.pinned}
                   updateContacts={this.updateState}
+                  tags={this.state.tags}
                 />
               </div>
               <div
@@ -156,6 +162,7 @@ class Search extends Component {
                   dropbox={this.state.result_dropbox}
                   pinned={this.state.pinned}
                   updateDropbox={this.updateState}
+                  tags={this.state.tags}
                 />
               </div>
               <div
@@ -168,6 +175,7 @@ class Search extends Component {
                   slack={this.state.result_slack}
                   pinned={this.state.pinned}
                   updateSlack={this.updateState}
+                  tags={this.state.tags}
                 />
               </div>
               <div
@@ -180,6 +188,7 @@ class Search extends Component {
                   tweet={this.state.result_tweet}
                   pinned={this.state.pinned}
                   updateTweet={this.updateState}
+                  tags={this.state.tags}
                 />
               </div>
             </div>

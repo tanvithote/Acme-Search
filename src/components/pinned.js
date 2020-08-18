@@ -4,13 +4,22 @@ import Contacts from "./contacts";
 import Dropbox from "./dropbox";
 import Twitter from "./twitter";
 import Slack from "./slack";
+import Pagination from "react-js-pagination";
 
-function pinned({ pinned, updateState }) {
-  const renderSwitch = card => {
-    // console.log("Pinned length", card.length);
+function pinned({ pinned, updateState, offset, perPage, currentPage }) {
+  const handlePageChange = e => {
+    const selectedPage = e;
+    offset = (selectedPage - 1) * perPage;
+    updateState("currentPage", selectedPage);
+    updateState("offset", offset);
+  };
+
+  const renderSwitch = offset => {
+    const data = pinned;
+    const card = data.slice(offset, offset + perPage);
     var output = [];
     for (let i = 0; i < card.length; i++) {
-      if (card[i] != undefined) {
+      if (card[i] !== undefined) {
         if (card[i].cardType === "result_calendar") {
           output.push(
             <div className="calendar" key={i}>
@@ -34,7 +43,6 @@ function pinned({ pinned, updateState }) {
             </div>
           );
         } else if (card[i].cardType === "result_dropbox") {
-          // console.log("dropbox", card[i]);
           output.push(
             <div className="calendar" key={i}>
               <Dropbox
@@ -75,27 +83,15 @@ function pinned({ pinned, updateState }) {
   };
 
   return (
-    <div class="row">
-      {renderSwitch(pinned)}
-      {/* <Dropbox
-        from="dropbox"
-        dropbox={pinned}
-        pinned={dropbox}
-        updateDropbox={updateState}
+    <div className="row">
+      {renderSwitch(offset)}
+      <Pagination
+        activePage={currentPage}
+        itemsCountPerPage={perPage}
+        totalItemsCount={pinned.length}
+        pageRangeDisplayed={3}
+        onChange={handlePageChange}
       />
-
-      <Slack
-        from="slack"
-        slack={pinned}
-        pinned={slack}
-        updateSlack={updateState}
-      />
-      <Twitter
-        from="tweet"
-        tweet={pinned}
-        pinned={tweet}
-        updateTweet={updateState}
-      /> */}
     </div>
   );
 }

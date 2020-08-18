@@ -8,6 +8,9 @@ body {
   margin: 20px;
   margin-bottom: 50px;
 }
+.badge {
+  margin: 2px;
+}
 
 .card {
   margin-right: 5px;
