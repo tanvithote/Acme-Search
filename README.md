@@ -24,17 +24,17 @@ Acme-search is a search engine that supports searching (by keyword or tag) over 
 The code has been divided into two sections:
 
 - The components folder consists of all the react components:
-  --search.js: This is the most important component as it retrieves the search results and displays them on the UI.
-  --calendar.js: Renders the calendar results on the UI
-  --contacts.js: Renders contact results on the UI
-  --dropbox.js: Renders dropbox results on the UI
-  --slack.js: Renders slack results on the UI
-  --tweet.js: Renders tweet results on the UI
-  --searchTab.js: Renders the search box and the submit button and handles user interaction with the same.
-  --BestMatch.js: Returns the "Best Match" label on items that match the most number of keywords/tags in the search query(displays only if there are more than 2 matches).
-  --tag.js: Renders the tags of each item in the form of pills(tabs).
-  --pinned.js: Renders the pinned items
-  --interaction.js: Handles the user interaction with the search results (pin, delete, tagging)
+  - search.js: This is the most important component as it retrieves the search results and displays them on the UI.
+  - calendar.js: Renders the calendar results on the UI
+  - contacts.js: Renders contact results on the UI
+  - dropbox.js: Renders dropbox results on the UI
+  - slack.js: Renders slack results on the UI
+  - tweet.js: Renders tweet results on the UI
+  - searchTab.js: Renders the search box and the submit button and handles user interaction with the same.
+  - BestMatch.js: Returns the "Best Match" label on items that match the most number of keywords/tags in the search query(displays only if there are more than 2 matches).
+  - tag.js: Renders the tags of each item in the form of pills(tabs).
+  - pinned.js: Renders the pinned items
+  - interaction.js: Handles the user interaction with the search results (pin, delete, tagging)
 - The data consists of all the JSON files
 
 ### Tech
